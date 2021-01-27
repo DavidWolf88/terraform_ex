@@ -39,7 +39,7 @@ resource "aws_autoscaling_group" "example" {
   tag {
     key                = "Name"
     value              = "terraform-asg-example"
-    propagate_at_lunch = true
+    propagate_at_launch = true
   } 
 }
 resource "aws_lb" "example" {
@@ -101,12 +101,13 @@ resource "aws_lb_listener_rule" "asg" {
   priority = 100
 
   condition {
-    field  = "path-pattern"
-    values = ["*"]
+    path_pattern {
+     values = ["*"]  
+    }
   }
   
   action {
-    type = "forward"
+    type             = "forward"
     target_group_arn = aws_lb_target_group.asg.arn
   }
 }
