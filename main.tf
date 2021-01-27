@@ -28,7 +28,7 @@ resource "aws_security_group" "instance" {
   }
 }
 resource "aws_autoscaling_group" "example" {
-  launch_configuration = "aws_launch_configuration.example.name"
+  launch_configuration = "aws_launch_configuration.example"
   vpc_zone_identifier = data.aws_subnet_ids.default.ids
 
   target_group_arns = [aws_lb_target_group.asg.arn]
