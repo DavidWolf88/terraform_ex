@@ -66,20 +66,19 @@ resource "aws_lb_listener" "http" {
 resource "aws_security_group" "alb" {
   name = "terraform-example-alb"
 
-  ingress = {
-    cidr_blocks = ["0.0.0.0/0"]
-    from_port = 80
-    protocol = "tcp"
-    to_port = 80
+  ingress {
+   from_port   = 80
+   to_port     = 80
+   protocol    = "tcp"
+   cidr_blocks = ["0.0.0.0/0"]
   }
 
-  egress = {
-    cidr_blocks = ["0.0.0.0/0"]
-    from_port = 0
-    protocol = "-1"
-    to_port = 0
+  egress {
+   from_port   = 0
+   to_port     = 0
+   protocol    = "-1"
+   cidr_blocks = ["0.0.0.0/0"]
   }
-  
 }
 resource "aws_lb_target_group" "asg" {
   name     = "terraform-asg-example"
@@ -114,7 +113,7 @@ resource "aws_lb_listener_rule" "asg" {
 data "aws_vpc" "default" {
   default = true
 }
-data "aws_subnet_id" "default" {
+data "aws_subnet_ids" "default" {
   vpc_id = data.aws_vpc.default.id
 }
 variable "server_port" {
