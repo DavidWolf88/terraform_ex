@@ -2,7 +2,6 @@ provider "aws" {
   region = "eu-central-1"
 }
 resource "aws_launch_configuration" "example" {
-  name = "Terraform cluster with LB"
   image_id        = "ami-01c74b7d55cbb6e31"
   instance_type   = "t2.micro"
   security_groups = [aws_security_group.instance.id]
@@ -28,7 +27,7 @@ resource "aws_security_group" "instance" {
   }
 }
 resource "aws_autoscaling_group" "example" {
-  launch_configuration = "aws_launch_configuration.example"
+  launch_configuration = aws_launch_configuration.example.name
   vpc_zone_identifier = data.aws_subnet_ids.default.ids
 
   target_group_arns = [aws_lb_target_group.asg.arn]
