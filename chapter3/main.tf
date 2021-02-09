@@ -3,7 +3,7 @@ provider "aws" {
 }
 
 resource "aws_s3_bucket" "terraform_state" {
-    bucket = "terraform_bucket"
+    bucket = "terraform-bucket"
 
     #prevent acc deletion of this s3bucket
     lifecycle {
