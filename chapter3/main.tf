@@ -3,7 +3,7 @@ provider "aws" {
 }
 
 resource "aws_s3_bucket" "terraform_state" {
-    bucket = "terraform-bucket"
+    bucket = "bazda-devops"
 
     #prevent acc deletion of this s3bucket
     lifecycle {
@@ -25,7 +25,7 @@ resource "aws_s3_bucket" "terraform_state" {
 }
 
 resource "aws_dynamodb_table" "terraform_locks" {
-    name         = "terraform-db"
+    name         = "bazda-devops-db"
     billing_mode = "PAY_PER_REQUEST"
     hash_key     = "LockID"
 
